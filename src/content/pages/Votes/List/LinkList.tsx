@@ -14,7 +14,6 @@ function LinkList() {
     const { setActivePage,linkList,totalPages,setOffset ,LIMIT,activePage } = rootStore.linkStore;
   
    const handlePaginationChange = (e) => {
-     debugger;
       const selectedPage = e.selected;
       const offset = selectedPage * LIMIT;
       setOffset(offset);
