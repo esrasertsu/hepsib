@@ -16,8 +16,7 @@ const App = () => {
   const content = useRoutes(routes());
 
   const rootStore = useContext(RootStoreContext);
-  const { loadLinks } = rootStore.linkStore;
- 
+  const { loadLinks, toastList } = rootStore.linkStore;
  useEffect(() => {
   loadLinks();
  }, [])
@@ -28,6 +27,7 @@ const App = () => {
     <GlobalStyle />
     <ThemeProvider theme={LightThemeSettings["light"]}>
       <Modal />
+      <Toast toastList={toastList} />
       {content}
     </ThemeProvider>
   </Fragment>

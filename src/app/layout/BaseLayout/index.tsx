@@ -2,7 +2,7 @@ import { FC, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import { Outlet } from 'react-router-dom';
 import styled from "styled-components";
-import Header from './Header';
+import Menu from './Menu';
 
 interface BaseLayoutProps {
   children?: ReactNode;
@@ -11,19 +11,18 @@ interface BaseLayoutProps {
 
 
 const MainWrapper = styled.div`
-        flex: 1 1 auto;
-        display: flex;
         height: 100%;
 `;
 const MainContent = styled.div`
-        margin-top: 50px;
-        flex: 1 1 auto;
+        width:100%;
+        margin-top:90px;
+        padding-bottom:50px;
 `;
 
 const BaseLayout: FC<BaseLayoutProps> = ({ children }) => {
   return <>
     <MainWrapper>
-        <Header />
+        <Menu />
         <MainContent>
            {children || <Outlet />}
         </MainContent>

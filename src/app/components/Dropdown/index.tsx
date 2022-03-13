@@ -13,23 +13,8 @@ function Dropdown({ title, items, onChange, multiSelect = false }) {
 
   useEffect(
       listenForOutsideClicks(listening, setListening, menuRef, setOpen)
-    );
+    ,[open]);
 
-  function handleOnClick(item) {
-    if (!selection.some(current => current.id === item.id)) {
-      if (!multiSelect) {
-        setSelection([item]);
-      } else if (multiSelect) {
-        setSelection([...selection, item]);
-      }
-    } else {
-      let selectionAfterRemoval = selection;
-      selectionAfterRemoval = selectionAfterRemoval.filter(
-        current => current.id !== item.id
-      );
-      setSelection([...selectionAfterRemoval]);
-    }
-  }
 
   const isItemInSelection = (item) => {
     if (selection.some(current => current.id === item.id)) {

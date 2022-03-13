@@ -1,23 +1,22 @@
 import { FC, ReactNode, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import styled from "styled-components";
-import { RootStoreContext } from 'src/app/stores/rootStore';
 import { observer } from 'mobx-react-lite';
-import { boolean } from 'yup';
+import './toast.scss';
+import { RootStoreContext } from 'src/app/stores/rootStore';
 
 interface ToastProps {
   className?: string;
-  children?: ReactNode;
   toastList?:any;
+
 }
 
 
 const Toast: FC<ToastProps> = ({
   className = '',
-  children,
-  toastList,
-  ...rest
+  toastList
 }) => {
+
+
 
     const [list, setList] = useState(toastList);
 
@@ -49,7 +48,7 @@ const Toast: FC<ToastProps> = ({
 
   return (
     list.map((toast, i) => 
-    <div className={`notification-container top-center ` + className} {...rest}>
+    <div className={`notification-container top-center ` + className}>
                 {
                         <div key={i}
                             className={`notification toast top-center`}
@@ -66,13 +65,13 @@ const Toast: FC<ToastProps> = ({
                         </div>
                 }
             </div>
+            
     )
   );
 };
 
 Toast.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
+  className: PropTypes.string,  
   toastList:PropTypes.any
 };
 

@@ -23,8 +23,7 @@ const validate = combineValidators({
 function AddVotesPage() {
 
   const rootStore = useContext(RootStoreContext);
-  const { saveLink } = rootStore.linkStore;
-  const [list, setList] = useState([]);
+  const { saveLink, setToastList , toastList} = rootStore.linkStore;
 
   let history = useNavigate();
 
@@ -52,7 +51,7 @@ function AddVotesPage() {
           description:"You cannot add existing link"
         }
       }
-      setList([...list, toastProperties]);
+      setToastList([...toastList, toastProperties]);
 
     
     })
@@ -61,11 +60,8 @@ function AddVotesPage() {
 
   return (
     <>
-    <Toast toastList={list}>
-      Successfully saved!
-      </Toast>
     <div className='container'>
-      <div style={{display:"flex", alignItems:"center"}} onClick={handleClikBackButton}>
+      <div style={{display:"flex", alignItems:"center", cursor:"pointer"}} onClick={handleClikBackButton}>
         <Icon name="arrow left" size="big"></Icon>
         <Text>Return to List</Text>
       </div>
@@ -104,9 +100,8 @@ function AddVotesPage() {
             <Button
               disabled={(invalid && !dirtySinceLastSubmit) || pristine}
               loading={submitting}
-              className='orangeBtn'
               circular
-              content="Giriş"
+              content="Add"
               fluid
             />
             

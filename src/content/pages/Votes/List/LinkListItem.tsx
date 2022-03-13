@@ -6,7 +6,6 @@ import ListItem from 'src/app/components/List/ListItem';
 import Text from 'src/app/components/Text';
 import { ILink } from 'src/app/models/links'
 import { RootStoreContext } from 'src/app/stores/rootStore';
-import Modal from 'src/app/components/Modal';
 import { ModalButtonWrapper, ModalContent, ModalParagraph, ModalTitle } from 'src/app/components/Modal/ModalContent';
 import CloseIcon from 'src/app/components/Modal/CloseIcon';
 
@@ -16,10 +15,8 @@ interface IProps{
 export default observer( function LinkListItem({link}:IProps){
    
     const rootStore = useContext(RootStoreContext);
-    const { upVotes, downVotes,deleteLink } = rootStore.linkStore;
-
+    const { upVotes, downVotes,deleteLink, setToastList, toastList } = rootStore.linkStore;
     const {openModal,closeModal,modal} = rootStore.modalStore;
-    const [show, setShow] = useState(false);
 
     const handleUpVote = (linkurl:string) =>{
         upVotes(linkurl);
@@ -30,10 +27,25 @@ export default observer( function LinkListItem({link}:IProps){
         downVotes(linkurl);
     }
 
+    const handleDelete = (linkurl:string) =>{
+        deleteLink(link.linkUrl);
+        if(modal.open) closeModal();
+   
+        const id = Math.floor((Math.random() * 101) + 1);
+
+        var toastProperties = {
+          id,
+          backgroundColor: '#5cb85c',
+          description:"Successsfully removed"
+        }
+     
+        setToastList([...toastList, toastProperties]);
+  }
+
     const handleDeleteItem =  (link:ILink) =>{
         if(modal.open) closeModal();
       
-        openModal("Giriş Yap", <>
+        openModal("", <>
         <CloseIcon onClick={closeModal}/>
          <ModalContent>
             {/* <CommentIcon /> */}
@@ -43,7 +55,7 @@ export default observer( function LinkListItem({link}:IProps){
             </ModalParagraph>
             <ModalButtonWrapper>
               <Button onClick={closeModal}>Cancel</Button>
-              <Button onClick={() => deleteLink(link.linkUrl)}>
+              <Button onClick={() => handleDelete(link.linkUrl)}>
                 Yes
               </Button> 
             </ModalButtonWrapper>
@@ -53,7 +65,8 @@ export default observer( function LinkListItem({link}:IProps){
     }
 
   return (
-    
+    <>
+
         <ListItem key={link.linkUrl} className="listItem">
             <div className='tooltip' onClick={() => handleDeleteItem(link)}>
               <Icon name="trash" color='red' />    
@@ -86,7 +99,7 @@ export default observer( function LinkListItem({link}:IProps){
            </div> 
 
             </ListItem>
-  
+            </>
   )
 
 })

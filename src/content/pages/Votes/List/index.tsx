@@ -40,11 +40,10 @@ function VotesPage() {
    }
 
   return (
-    <>
      <div className='container'>
       <div className='addNewItem'  role="button" onClick={showUserDetails}>
         <Box>
-           <Icon name='plus' size='huge' color="blue"></Icon>
+           <Icon name='plus' size="huge" color="blue"></Icon>
         </Box>
         <Text color="black" className='capital bold' size="big" align="center">
           Submit a link 
@@ -54,7 +53,6 @@ function VotesPage() {
       <Dropdown title="Order by" items={items} onChange={handleChange} />
       <LinkList />
       </div>
-    </>
   );
 }
 

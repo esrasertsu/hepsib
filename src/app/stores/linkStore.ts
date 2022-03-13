@@ -35,6 +35,7 @@ export default class LinkStore{
     @observable linkList: ILink[] = [];
     @observable linkRegistery = new Map<string,ILink>();
 
+    @observable toastList: any[] = []; //son saniye yapabildim kendisine özel store ve interface yaratamadım aceleyle
  
     @action setLoadingCategories = (lp : boolean) =>{
         this.loadingLinks = lp;
@@ -56,6 +57,9 @@ export default class LinkStore{
         this.activePage = index;
     }
 
+    @action setToastList= (list:any) =>{
+        this.toastList = list;
+    } 
     @computed get totalPages(){
         return Math.ceil(this.linkCount / this.LIMIT);
     }
@@ -139,6 +143,7 @@ export default class LinkStore{
             var existingLink = existingArray.length >0 ? existingArray.filter(x => x.linkUrl === newLink.linkUrl)[0] : null;
             if(existingLink)
             {
+                this.loadingLinks = false;
                 return false;
             }else{
                 existingArray.push(newLink)
@@ -147,10 +152,11 @@ export default class LinkStore{
 
                this.linkRegistery.set(values.linkUrl, newLink);
                this.getSortedLinks();
+
+               this.loadingLinks = false;
                return true;
             }
            
-           this.loadingLinks = false;
 
     }
 
@@ -162,6 +168,7 @@ export default class LinkStore{
         this.linkRegistery.delete(currentLink.linkUrl);
         this.linkRegistery.set(currentLink.linkUrl, currentLink);
         this.editLink(currentLink);
+
     }
 
     
@@ -188,11 +195,12 @@ export default class LinkStore{
         
         this.linkList = this.linkList.filter(a => a.linkUrl !== url);
         this.linkRegistery.delete(url);
+        this.getSortedLinks();
 
     }
 
     @action editLink = async (link:ILink) =>{
-
+            debugger;
             var existingLS = localStorage.getItem('links');
             let existingArray = existingLS ? JSON.parse(existingLS) : [];
 
@@ -202,13 +210,9 @@ export default class LinkStore{
             {
                 //error mesajı göster
             }else{
-                debugger;
                 existingLink["votes"] = link.votes;
                 localStorage.setItem('links', JSON.stringify(existingArray))
-                this.linkCount =this.linkCount+1 ;
-
-              // this.getSortedLinks();
-
+                this.getSortedLinks();
             }
            
 

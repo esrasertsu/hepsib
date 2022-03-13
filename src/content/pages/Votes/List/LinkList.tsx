@@ -35,12 +35,14 @@ function LinkList() {
                       nextLabel={">"}
                       breakLabel={"..."}
                       pageCount={totalPages}
-                      pageRangeDisplayed={LIMIT}
+                      pageRangeDisplayed={5}
                       onPageChange={handlePaginationChange}
                       containerClassName={"pagination"}
                       pageClassName={"pages"}
                       activeClassName={"active"}
                       forcePage={activePage}
+                      marginPagesDisplayed={2}
+
                       />
         </div>
      }

@@ -2,11 +2,12 @@
 	font-size: 14px;
 	box-sizing: border-box;
 	position: fixed;
-	z-index: 999999
+	z-index: 999999;
+	width: 100%;
 }
 
 .top-center {
-	top: 12px;
+	top: 50px;
 	margin: auto;
 	transition: transform .6s ease-in-out;
 	animation: toast-in-right .7s;
@@ -75,6 +76,7 @@
     width: 365px;
 	color: #fff;
 	padding: 20px 15px 10px 10px;
+	margin: auto;
 }
 
 .notification-container button {

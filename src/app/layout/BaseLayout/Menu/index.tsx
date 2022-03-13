@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import styled from "styled-components";
 
-const HeaderWrapper =  styled.div `
+const MenuWrapper =  styled.div `
         height: 70px;
         padding: 10px;
         right: 0;
@@ -9,23 +9,22 @@ const HeaderWrapper =  styled.div `
         top:0;
         display:flex;
         flex-direction:row;
-        justfy-content:space-between;
+        justify-content:space-between;
         background-color:  ${({ theme }) => theme.backgroundColor};
         box-shadow: 0 3px 7px 0 #d4d4d5;
         border-bottom:1px solid gray;
-        position: fixed;
-        justify-content: space-between;
+        position: absolute;
         width: 100%;
 `;
 
-function Header() {
+function Menu() {
 
   return (
-    <HeaderWrapper display="flex" alignItems="center">
+    <MenuWrapper>
       <div>HepsiBurada.com</div>
       <div>Link Vote Challange</div>
-    </HeaderWrapper>
+    </MenuWrapper>
   );
 }
 
-export default Header;
+export default Menu;

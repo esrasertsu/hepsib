@@ -27,8 +27,7 @@
 .container{
     height: 100%;
     display: block;
-
-    
+    margin:0 auto;
 }
 
 .pagination-container{
@@ -93,7 +92,6 @@
   
  
 .link-list{
-    height: 500px;
     .listItem{
         position: relative;
         display: inline-block;
@@ -150,7 +148,7 @@
     display: flex;
     justify-content: space-between !important;
     background-color: #f3f3f3;
-    padding: 20px;
+    padding: 10px;
     font-size: 13px;
     border-radius: 3px;
     align-items: center;
