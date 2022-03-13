@@ -1,11 +1,14 @@
 import { observer } from 'mobx-react'
-import { useContext } from 'react';
-import { Icon } from 'semantic-ui-react';
+import { useContext, useState } from 'react';
+import { Button, Icon } from 'semantic-ui-react';
 import Box from 'src/app/components/Box';
 import ListItem from 'src/app/components/List/ListItem';
 import Text from 'src/app/components/Text';
 import { ILink } from 'src/app/models/links'
 import { RootStoreContext } from 'src/app/stores/rootStore';
+import Modal from 'src/app/components/Modal';
+import { ModalButtonWrapper, ModalContent, ModalParagraph, ModalTitle } from 'src/app/components/Modal/ModalContent';
+import CloseIcon from 'src/app/components/Modal/CloseIcon';
 
 interface IProps{
     link: ILink;
@@ -14,6 +17,9 @@ export default observer( function LinkListItem({link}:IProps){
    
     const rootStore = useContext(RootStoreContext);
     const { upVotes, downVotes,deleteLink } = rootStore.linkStore;
+
+    const {openModal,closeModal,modal} = rootStore.modalStore;
+    const [show, setShow] = useState(false);
 
     const handleUpVote = (linkurl:string) =>{
         upVotes(linkurl);
@@ -24,14 +30,32 @@ export default observer( function LinkListItem({link}:IProps){
         downVotes(linkurl);
     }
 
-    const handleDeleteItem =  (linkurl:string) =>{
-        deleteLink(linkurl);
+    const handleDeleteItem =  (link:ILink) =>{
+        if(modal.open) closeModal();
+      
+        openModal("Giriş Yap", <>
+        <CloseIcon onClick={closeModal}/>
+         <ModalContent>
+            {/* <CommentIcon /> */}
+            <ModalTitle>Do you want to remove</ModalTitle>
+            <ModalParagraph>
+              {link.linkName}
+            </ModalParagraph>
+            <ModalButtonWrapper>
+              <Button onClick={closeModal}>Cancel</Button>
+              <Button onClick={() => deleteLink(link.linkUrl)}>
+                Yes
+              </Button> 
+            </ModalButtonWrapper>
+          </ModalContent>
+        </>,false,
+        "") 
     }
 
   return (
     
         <ListItem key={link.linkUrl} className="listItem">
-            <div className='tooltip' onClick={() => handleDeleteItem(link.linkUrl)}>
+            <div className='tooltip' onClick={() => handleDeleteItem(link)}>
               <Icon name="trash" color='red' />    
             </div>
             <Box className='listItem-vote-box'>

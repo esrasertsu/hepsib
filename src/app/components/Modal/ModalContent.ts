@@ -1,13 +1,5 @@
 import styled from "styled-components";
 
-export const ModalWrapper = styled.section`
-  padding: 16px;
-  background-color: ${({ theme }) => theme.backgroundColor};
-  border-radius: 16px;
-  width: 600px;
-  padding-bottom: 50px;
-`;
-
 export const ModalContent = styled.div`
   max-width: 400px;
   margin-left: auto;

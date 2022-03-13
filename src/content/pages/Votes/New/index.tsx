@@ -1,15 +1,14 @@
-import Footer from 'src/app/components/Footer';
 import { observer } from 'mobx-react';
 import { Form as FinalForm , Field } from 'react-final-form';
 import { combineValidators, composeValidators, hasLengthGreaterThan, isRequired } from 'revalidate';
-import Box from '../../../../app/components/Box';
 import { Button, Form, Header, Icon } from 'semantic-ui-react';
 import Text from 'src/app/components/Text';
 import { ILinkForm } from 'src/app/models/links';
 import TextInput from 'src/app/components/FormInput/TextInput';
 import { useNavigate } from 'react-router';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { RootStoreContext } from 'src/app/stores/rootStore';
+
 
 
 const validate = combineValidators({
@@ -27,14 +26,13 @@ function AddVotesPage() {
 
   let history = useNavigate();
 
-const handleClikBackButton = (): void =>{
-    history(`/votes/list`)
- }
+  const handleClikBackButton = (): void =>{
+      history(`/votes/list`)
+  }
      
-const handleLogin = async(values:ILinkForm) =>{
-  saveLink(values);
- 
-}
+  const handleSave = async(values:ILinkForm) =>{
+    saveLink(values);
+  }
 
   return (
     <>
@@ -46,7 +44,7 @@ const handleLogin = async(values:ILinkForm) =>{
       <div className='small-space'></div>
 
       <FinalForm
-        onSubmit={handleLogin}
+        onSubmit={handleSave}
         validate={validate}
         render={({
           handleSubmit,
