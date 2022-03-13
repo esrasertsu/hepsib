@@ -1,23 +1,26 @@
-import styled from "styled-components";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const Button = styled.button`
-  padding: 14px 16px;
-  border-radius: 26px;
-  font-size: 16px;
-  cursor: pointer;
-  font-weight: bold;
-  display: block;
-  width: 100%;
-  background-color: ${({ theme, type }) => theme.button[type].backgroundColor};
-  border: 1px solid ${({ theme, type }) => theme.button[type].borderColor};
-  color: ${({ theme, type }) => theme.button[type].color};
-  text-transform: capitalize;
+const Button = props => {
+    const { label, className, handleClick } = props;
 
-  &:hover {
-    background-color: ${({ theme, type }) =>
-      theme.button[type].hoverBackgroundColor};
-    border-color: ${({ theme, type }) => theme.button[type].borderColor};
-  }
-`;
+    return (
+        <>
+            <button 
+                className={className}
+                onClick={handleClick}
+            >
+                {label}
+            </button>
+        </>
+    );
+
+}
+
+Button.propTypes = {
+    label: PropTypes.string.isRequired,
+    className: PropTypes.string.isRequired,
+    handleClick: PropTypes.func
+}
 
 export default Button;

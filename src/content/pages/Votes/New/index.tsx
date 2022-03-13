@@ -6,8 +6,9 @@ import Text from 'src/app/components/Text';
 import { ILinkForm } from 'src/app/models/links';
 import TextInput from 'src/app/components/FormInput/TextInput';
 import { useNavigate } from 'react-router';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { RootStoreContext } from 'src/app/stores/rootStore';
+import Toast from 'src/app/components/Toast';
 
 
 
@@ -23,6 +24,7 @@ function AddVotesPage() {
 
   const rootStore = useContext(RootStoreContext);
   const { saveLink } = rootStore.linkStore;
+  const [list, setList] = useState([]);
 
   let history = useNavigate();
 
@@ -31,11 +33,37 @@ function AddVotesPage() {
   }
      
   const handleSave = async(values:ILinkForm) =>{
-    saveLink(values);
+   
+    saveLink(values).then((res) => 
+    {
+      const id = Math.floor((Math.random() * 101) + 1);
+
+      if(res)
+      {
+        var toastProperties = {
+          id,
+          backgroundColor: '#5cb85c',
+          description:"Successsfully saved"
+        }
+      }else{
+        var toastProperties = {
+          id,
+          backgroundColor: '#d9534f',
+          description:"You cannot add existing link"
+        }
+      }
+      setList([...list, toastProperties]);
+
+    
+    })
+   
   }
 
   return (
     <>
+    <Toast toastList={list}>
+      Successfully saved!
+      </Toast>
     <div className='container'>
       <div style={{display:"flex", alignItems:"center"}} onClick={handleClikBackButton}>
         <Icon name="arrow left" size="big"></Icon>

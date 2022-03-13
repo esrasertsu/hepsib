@@ -139,7 +139,7 @@ export default class LinkStore{
             var existingLink = existingArray.length >0 ? existingArray.filter(x => x.linkUrl === newLink.linkUrl)[0] : null;
             if(existingLink)
             {
-                //error mesajı göster
+                return false;
             }else{
                 existingArray.push(newLink)
                 localStorage.setItem('links', JSON.stringify(existingArray))
@@ -147,7 +147,7 @@ export default class LinkStore{
 
                this.linkRegistery.set(values.linkUrl, newLink);
                this.getSortedLinks();
-
+               return true;
             }
            
            this.loadingLinks = false;
