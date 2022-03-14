@@ -14,7 +14,6 @@
     "@types/react-router-dom": "5.3.0",
     "axios": "^0.24.0",
     "clsx": "1.1.1",
-    "date-fns": "2.25.0",
     "final-form": "^4.20.1",
     "formik": "^2.2.9",
     "history": "5.0.1",
