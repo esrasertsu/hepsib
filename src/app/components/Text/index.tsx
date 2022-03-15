@@ -97,30 +97,5 @@ const Text: FC<TextProps> = ({
   );
 };
 
-Text.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-  onClick:PropTypes.any,
-  size: PropTypes.oneOf([
-    'big',
-    'header',
-    'normal',
-    'small'
-  ]),
-  align: PropTypes.oneOf([
-    'left',
-    'center',
-    'right'
-  ]),
-  color: PropTypes.oneOf([
-    'primary',
-    'secondary',
-    'error',
-    'warning',
-    'success',
-    'info',
-    'black'
-  ])
-};
 
 export default Text;

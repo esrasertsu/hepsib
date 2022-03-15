@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react';
 import { Form as FinalForm , Field } from 'react-final-form';
 import { combineValidators, composeValidators, hasLengthGreaterThan, isRequired } from 'revalidate';
-import { Button, Form, Header, Icon } from 'semantic-ui-react';
+import { Form, Header, Icon } from 'semantic-ui-react';
 import Text from 'src/app/components/Text';
 import { ILinkForm } from 'src/app/models/links';
 import TextInput from 'src/app/components/FormInput/TextInput';
@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router';
 import { useContext, useEffect, useState } from 'react';
 import { RootStoreContext } from 'src/app/stores/rootStore';
 import Toast from 'src/app/components/Toast';
+import Button from 'src/app/components/Button';
 
 
 
@@ -98,12 +99,11 @@ function AddVotesPage() {
               
 
             <Button
-              disabled={(invalid && !dirtySinceLastSubmit) || pristine}
-              loading={submitting}
-              circular
-              content="Add"
-              fluid
-            />
+              // disabled={(invalid && !dirtySinceLastSubmit) || pristine}
+              // loading={submitting}
+              // circular
+              // fluid
+            >Add</Button>
             
          
 

@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import NProgress from 'nprogress';
+import Box from '../Box';
 
 function SuspenseLoader() {
   useEffect(() => {
@@ -11,7 +12,10 @@ function SuspenseLoader() {
   }, []);
 
   return (
-   <div></div>
+    <Box
+      className='loading-box'>
+      Yükleniyor...
+    </Box>   
   );
 }
 

@@ -7,10 +7,6 @@ import { BrowserRouter } from 'react-router-dom';
 
 import 'nprogress/nprogress.css';
 
-
-
-
-
 ReactDOM.render(
       <BrowserRouter>
         <App />

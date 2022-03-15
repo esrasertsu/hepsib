@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react';
 import Box from '../../../../app/components/Box';
 import Text from 'src/app/components/Text';
-import { Icon, IconGroup } from 'semantic-ui-react';
+import { Icon } from 'semantic-ui-react';
 import { useNavigate } from 'react-router';
 import LinkList from './LinkList';
 import Divider from 'src/app/components/Divider';

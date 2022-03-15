@@ -35,8 +35,5 @@ const Divider: FC<DividerProps> = ({
   );
 };
 
-Divider.propTypes = {
-  className: PropTypes.string
-};
 
 export default Divider;

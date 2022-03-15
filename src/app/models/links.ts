@@ -13,4 +13,5 @@ export interface ILink{
     linkName:string;
     linkUrl:string;
     votes:number;
+    createdDate:Date;
 }

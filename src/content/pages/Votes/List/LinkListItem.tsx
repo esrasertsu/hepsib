@@ -2,12 +2,12 @@ import { observer } from 'mobx-react'
 import { useContext, useState } from 'react';
 import { Button, Icon } from 'semantic-ui-react';
 import Box from 'src/app/components/Box';
-import ListItem from 'src/app/components/List/ListItem';
 import Text from 'src/app/components/Text';
 import { ILink } from 'src/app/models/links'
 import { RootStoreContext } from 'src/app/stores/rootStore';
 import { ModalButtonWrapper, ModalContent, ModalParagraph, ModalTitle } from 'src/app/components/Modal/ModalContent';
 import CloseIcon from 'src/app/components/Modal/CloseIcon';
+import ListItem from 'src/app/components/List/ListItem';
 
 interface IProps{
     link: ILink;

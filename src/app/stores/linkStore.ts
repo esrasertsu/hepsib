@@ -30,7 +30,7 @@ export default class LinkStore{
     @observable activePage = 0;
     @observable linkCount = 0;
     @observable offset = 0;
-    @observable predicate: "most" | "less" = "most";
+    @observable predicate: "most" | "less" | null = null;
 
     @observable linkList: ILink[] = [];
     @observable linkRegistery = new Map<string,ILink>();
@@ -41,7 +41,7 @@ export default class LinkStore{
         this.loadingLinks = lp;
     }
 
-    @action setPredicate = (pr : "most" | "less") =>{
+    @action setPredicate = (pr : "most" | "less" | null) =>{
         this.predicate = pr;
     }
 
@@ -64,24 +64,33 @@ export default class LinkStore{
         return Math.ceil(this.linkCount / this.LIMIT);
     }
 
+    @computed get linksByVote(){
+        return Array.from(this.linkRegistery.values())
+     }
     
     @computed get sortedLinksByVote(){
-        return Array.from(this.linkRegistery.values()).sort((a,b) => b.votes - a.votes)
+        return Array.from(this.linkRegistery.values()).sort((a,b) => (b.votes - a.votes ||  Date.parse(b.createdDate.getTime().to - a.createdDate.getTime()))
      }
 
      @computed get lessSortedLinksByVote(){
-        return Array.from(this.linkRegistery.values()).sort((a,b) => a.votes - b.votes)
+        return Array.from(this.linkRegistery.values()).sort((a,b) => (a.votes - b.votes || Date.parse(a.createdDate.getTime().toString()) - Date.parse(b.createdDate.getTime().toString()) ))
      }
 
 
      
     @action getSortedLinks = async () =>{
-        debugger;
-        if(this.predicate === "most")
-          this.setLinkList(this.sortedLinksByVote.slice(this.offset, this.offset + this.LIMIT));
-        else 
-          this.setLinkList(this.lessSortedLinksByVote.slice(this.offset, this.offset + this.LIMIT));
-
+        switch (this.predicate) {
+            case "most":
+                this.setLinkList(this.sortedLinksByVote.slice(this.offset, this.offset + this.LIMIT));
+                break;
+            case "less":
+                this.setLinkList(this.lessSortedLinksByVote.slice(this.offset, this.offset + this.LIMIT));
+                break;
+            default:
+                this.setLinkList(this.linksByVote.slice(this.offset, this.offset + this.LIMIT));
+                break;
+        }
+           
     }
     
     @action prevPage()
@@ -138,7 +147,8 @@ export default class LinkStore{
             let newLink : ILink = {
                 linkName: values.linkName,
                 linkUrl: values.linkUrl,
-                votes:0
+                votes:0,
+                createdDate: new Date
             }
             var existingLink = existingArray.length >0 ? existingArray.filter(x => x.linkUrl === newLink.linkUrl)[0] : null;
             if(existingLink)

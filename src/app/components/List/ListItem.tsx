@@ -1,5 +1,4 @@
 import { FC, ReactNode } from 'react';
-import PropTypes from 'prop-types';
 import styled from "styled-components";
 
 interface ListItemProps {
@@ -31,11 +30,6 @@ const ListItem: FC<ListItemProps> = ({
       {children}
     </ListItemWrapper>
   );
-};
-
-ListItem.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string
 };
 
 export default ListItem;

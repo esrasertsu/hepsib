@@ -1,26 +1,40 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
 
-const Button = props => {
-    const { label, className, handleClick } = props;
-
-    return (
-        <>
-            <button 
-                className={className}
-                onClick={handleClick}
-            >
-                {label}
-            </button>
-        </>
-    );
-
+interface Props {
+  border?: string;
+  color?: string;
+  children?: React.ReactNode;
+  height?: string;
+  onClick?: () => void;
+  radius?: string;
+  width?: string;
 }
 
-Button.propTypes = {
-    label: PropTypes.string.isRequired,
-    className: PropTypes.string.isRequired,
-    handleClick: PropTypes.func
+const Button: React.FC<Props> = ({ 
+    border="none",
+    color="#d4d4d5",
+    children,
+    height="40px",
+    onClick, 
+    radius="20px",
+    width="100%"
+  }) => { 
+  return (
+    <button 
+      onClick={onClick}
+      style={{
+         backgroundColor: color,
+         border,
+         borderRadius: radius,
+         height,
+         width,
+         cursor:"pointer",
+         color:"white"
+      }}
+    >
+    {children}
+    </button>
+  );
 }
 
 export default Button;

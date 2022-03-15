@@ -1,5 +1,4 @@
 import { FC, ReactNode, useContext } from 'react';
-import PropTypes from 'prop-types';
 import styled from "styled-components";
 import { RootStoreContext } from 'src/app/stores/rootStore';
 import { observer } from 'mobx-react-lite';
@@ -57,11 +56,6 @@ const Modal: FC<ModalProps> = ({
       {body}
     </ModalWrapper>
   );
-};
-
-Modal.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string
 };
 
 export default observer(Modal);

@@ -1,5 +1,4 @@
 import { FC, ReactNode } from 'react';
-import PropTypes from 'prop-types';
 import styled from "styled-components";
 
 interface ListProps {
@@ -26,11 +25,6 @@ const List: FC<ListProps> = ({
       {children}
     </ListWrapper>
   );
-};
-
-List.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string
 };
 
 export default List;

@@ -70,9 +70,5 @@ const Toast: FC<ToastProps> = ({
   );
 };
 
-Toast.propTypes = {
-  className: PropTypes.string,  
-  toastList:PropTypes.any
-};
 
 export default observer(Toast);
